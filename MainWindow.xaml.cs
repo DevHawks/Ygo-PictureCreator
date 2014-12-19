@@ -1,17 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace Ygo_Picture_Creator
 {
@@ -19,6 +13,7 @@ namespace Ygo_Picture_Creator
     {
         #region fields
         public enum ConsoleMsgType { Normal, Error, Warning }
+        public Dictionary<string, Template> Templatelist = new Dictionary<string, Template>();
         #endregion
 
         public MainWindow()
@@ -30,14 +25,12 @@ namespace Ygo_Picture_Creator
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Program.DbPath = @"F:\Portable Programme\YGOPro\DevPro\cards.cdb";
-
-            if (!string.IsNullOrEmpty(Program.DbPath))
-            { 
-                lbDatabaseSource.Content = "[" + Program.CardManager.Cardlist.Count + " Cards] " + Program.DbPath;
-            }
-
             rtbConsole.Document.Blocks.Clear();
+
+            if (!string.IsNullOrEmpty(Program.Config.DefaultDatabasePath))
+                SetDatabasePath(Program.Config.DefaultDatabasePath);
+            else
+                SetDatabasePath("");
         }
 
         private void SetDatabasePath(string path)
@@ -73,15 +66,12 @@ namespace Ygo_Picture_Creator
 
         private void CancelBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Program.CardManager.Cancel();
+            Program.CardManager.Creator.Cancel();
         }
 
         private void StartBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Program.CardManager.CreatePictures();
-
-            //CardPicture pic = new CardPicture(Program.CardManager.Cardlist[1]);
-            //pic.Save();
+            Program.CardManager.Creator.Start();
         }
 
         public void Write(string text, ConsoleMsgType msgType = ConsoleMsgType.Normal)
@@ -115,6 +105,64 @@ namespace Ygo_Picture_Creator
                     rtbConsole.ScrollToEnd();
                 }
             }
+        }
+
+        private void LoadTemplates()
+        {
+            string path = DirectoryManager.DirTemplate;
+            Templatelist = new Dictionary<string, Template>();
+            cbxTemplates.Items.Clear();
+
+            string[] files = Directory.GetFiles(DirectoryManager.DirTemplate, "*.xml", SearchOption.TopDirectoryOnly);
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                FileInfo info = new FileInfo(files[i]);
+
+                Template tmp = (Template)Program.DeserializeClass(info.FullName, typeof(Template));
+
+                if(!string.IsNullOrEmpty(tmp.TemplateName))
+                {
+                    Templatelist.Add(tmp.TemplateName, tmp);
+                    cbxTemplates.Items.Add(tmp.TemplateName);
+                }
+            }
+
+            if (cbxTemplates.Items.Count > 0)
+                cbxTemplates.SelectedIndex = 0;
+        }
+
+        public Template GetCurrentTemplate()
+        {
+            if (cbxTemplates.SelectedIndex < 0) return null;
+
+            if (string.IsNullOrEmpty(cbxTemplates.SelectedItem.ToString()))
+                return null;
+
+            string tmpName = cbxTemplates.SelectedItem.ToString();
+
+            if (Templatelist.ContainsKey(tmpName))
+                return Templatelist[tmpName];
+
+            return null;
+        }
+
+        private void cbxTemplates_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            CardCreator.Temp = GetCurrentTemplate();
+        }
+
+        private void OpenTEBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if(Program.TempEditor == null)
+                Program.TempEditor = new TemplateEditor();
+
+            Program.TempEditor.Show();
+        }
+
+        private void Refresh_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            LoadTemplates();
         }
     }
 }

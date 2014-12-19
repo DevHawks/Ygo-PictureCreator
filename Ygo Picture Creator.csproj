@@ -66,10 +66,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Creator\CardCreator.cs" />
+    <Compile Include="Editor\TemplateEditor.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="Creator\Template.cs" />
+    <Compile Include="Editor\TemplateEditor.xaml.cs">
+      <DependentUpon>TemplateEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ygopro\Card.cs" />
     <Compile Include="Ygopro\CardManagement.cs" />
-    <Compile Include="Ygopro\CardPicture.cs" />
     <Compile Include="Ygopro\CardStrings.cs" />
     <Compile Include="Ygopro\Database.cs" />
     <Compile Include="Ygopro\EntitieHelper.cs" />
@@ -81,12 +86,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configurations.cs" />
-    <Compile Include="DirectoryManager.cs" />
+    <Compile Include="Creator\Configurations.cs" />
+    <Compile Include="Creator\DirectoryManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Generally.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Shared.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editor\TemplateEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +152,7 @@
     <Resource Include="Images\minimize_window-26.png" />
     <Content Include="Library\System.Data.SQLite.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

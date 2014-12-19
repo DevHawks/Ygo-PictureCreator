@@ -1,0 +1,548 @@
+﻿<Window x:Class="Ygo_Picture_Creator.TemplateEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Title="Picture Creator"  Width="900" WindowStyle="None" ResizeMode="CanMinimize" Height="500"
+        Icon="/Ygo Picture Creator;component/favicon.ico">
+    <Border Background="{StaticResource cDark2}" BorderBrush="{StaticResource cHigh1}" BorderThickness="1">
+        <Border.Resources>
+            <Style TargetType="TextBox" x:Key="tb">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Width" Value="200" />
+                <Setter Property="Margin" Value="145,2,2,2" />
+                <Setter Property="Foreground" Value="{StaticResource cLight3}" />
+                <Setter Property="BorderBrush" Value="{StaticResource cDark5}" />
+                <Setter Property="Background" Value="{StaticResource cDark1}" />
+                <Setter Property="BorderThickness" Value="1,1,1,1" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="5,0,5,0" />
+                <Setter Property="MaxLines" Value="1" />
+            </Style>
+            <Style x:Key="lb" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Right" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="8,0" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Width" Value="140" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="Background" Value="{StaticResource cDark3}" />
+                <Setter Property="BorderBrush" Value="{StaticResource cDark4}" />
+                <Setter Property="Foreground" Value="{StaticResource cLight4}" />
+                <Setter Property="BorderThickness" Value="1,1,1,1" />
+            </Style>
+            <Style x:Key="splitter" TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="8,0" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="7,2,8,2" />
+                <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+                <Setter Property="Background" Value="{StaticResource cHigh3}" />
+                <Setter Property="BorderBrush" Value="{StaticResource cDark4}" />
+                <Setter Property="Foreground" Value="{StaticResource cDark5}" />
+                <Setter Property="BorderThickness" Value="1,1,1,1" />
+            </Style>
+            <Style x:Key="cb" TargetType="CheckBox">
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Margin" Value="145,2,2,2" />
+                <Setter Property="IsChecked" Value="True" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Background" Value="DarkGray" />
+                <Setter Property="Height" Value="20" />
+            </Style>
+        </Border.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="560" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="0" MouseLeftButtonDown="WindowDrag" Grid.Column="0" Grid.ColumnSpan="2"
+                       Fill="{StaticResource cDark3}" Stroke="{StaticResource cDark4}" StrokeThickness="0,0,0,1" />
+            <Rectangle Grid.Row="3" MouseLeftButtonDown="WindowDrag" Grid.Column="0" Grid.ColumnSpan="2"
+                       Fill="{StaticResource cDark3}" Stroke="{StaticResource cDark4}" StrokeThickness="0,1,0,0" />
+
+            <Menu Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent">
+                <MenuItem x:Name="w1" Click="MinimizeClick_Executed" Style="{StaticResource MinimizeItem}"/>
+                <MenuItem x:Name="w3" Click="CloseClick_Executed" Style="{StaticResource CloseItem}"/>
+            </Menu>
+
+            <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="30" Margin="2" Width="250">
+                <Label Width="80" Content="Template:" Margin="2" HorizontalAlignment="Left"
+                                   Style="{StaticResource DirLabel}" HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cbxTemplates" Width="160" Margin="2" Foreground="White" IsReadOnly="True" 
+                          HorizontalAlignment="Right" SelectionChanged="cbxTemplates_SelectionChanged" />
+            </Grid>
+
+            <Border x:Name="EditArea" Grid.Row="2" Grid.Column="0" Margin="5" Background="{StaticResource cDark3}" 
+                    BorderBrush="{StaticResource cDark4}" BorderThickness="1">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Allgemeine Settings" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Template Name:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTempName" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Gesammt Breite:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbFullWidth" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Gesammt Höhe:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbFullHeight" Style="{StaticResource tb}" />
+                        </Grid>
+                        <!-- Cardtype -->
+                        <Label Content="YuGiOh Kartentyp" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Normal Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeNormal" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Effekt Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeEffect" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Ritual Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeRitual" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Fusion Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeFusion" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Synchro Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeSynchro" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Xyz Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeXyz" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Spielmarke:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeToken" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Pendel Monster:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypePendulum" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Zauberkarte:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeSpell" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Fallenkarte:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbTypeTrap" Style="{StaticResource tb}" />
+                        </Grid>
+                    
+                        <!-- Attribute -->
+                        <Label Content="Karten Eigenschaft" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbAttributes" Style="{StaticResource cb}" 
+                                      Content="Soll die Eigenschaft visuell dargestellt werden." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbAttributeX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbAttributeY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbAttributeWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbAttributeHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Finsternis:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeDark" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Licht:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeLight" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Wind:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeWind" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Erde:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeEarth" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Wasser:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeWater" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Feuer:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeFire" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Göttliche Bestie:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeDivine" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Zauberkarte:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeSpell" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Fallenkarte:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAttributeTrap" Style="{StaticResource tb}" />
+                        </Grid>
+
+                        <!-- Cardname -->
+                        <Label Content="Kartenname" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftart:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbNameFontfamily" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftgröße:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbNameFontsize" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbNameX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbNameY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbNameWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbNameHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Normal Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameNormalR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameNormalG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameNormalB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Effekt Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameEffectR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameEffectG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameEffectB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Fusion Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameFusionR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameFusionG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameFusionB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Ritual Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameRitualR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameRitualG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameRitualB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Synchro Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameSynchroR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameSynchroG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameSynchroB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="XYZ Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameXyzR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameXyzG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameXyzB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Pendel Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNamePendulumR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNamePendulumG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNamePendulumB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Monster:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameTokenR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameTokenG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameTokenB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Zauberkarte:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameSpellR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameSpellG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameSpellB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Fallenkarte:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbNameTrapR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbNameTrapG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbNameTrapB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+
+                        <!-- Cardpicture -->
+                        <Label Content="Kartenbild" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbPicX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbPicY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbPicWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbPicHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+
+                        <!-- Level Rank from Monster -->
+                        <Label Content="Level und Rank der Monster" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbRank" Style="{StaticResource cb}" 
+                                      Content="Soll Rank/Level visuell dargestellt werden." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Anordnung?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbRankHorizontal" Style="{StaticResource cb}" 
+                                      Content="Horizontal anordnen." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Richtung?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbRankLeftToRight" Style="{StaticResource cb}" 
+                                      Content="Von Links nach Rechts zeichnen." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbRankX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbRankY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbRankWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbRankHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Level Texture:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbLevelPic" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Rank Texture:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbRankPic" Style="{StaticResource tb}" />
+                        </Grid>
+
+                        <!-- Monstertypes -->
+                        <Label Content="Monstertypen" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftart:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbMTypeFontfamily" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftgröße:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbMTypeFontsize" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftfarbe:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbMTypeR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbMTypeG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbMTypeB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbMType" Style="{StaticResource cb}" 
+                                      Content="Sollen die Monstertypen visuell dargestellt werden." />
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Height="30" Margin="5,3,8,2">
+                            <Label Content="Format:" Style="{StaticResource lb}" Margin="2" Width="70"/>
+                            <TextBox x:Name="tbMTypeFormat" Style="{StaticResource tb}" Margin="2" Width="100"/>
+                            <Label Content="MT:" Style="{StaticResource lb}" Margin="2" Width="40"/>
+                            <TextBox x:Name="tbMTypeT1" Style="{StaticResource tb}" Margin="2" Width="30" MaxLength="1"/>
+                            <Label Content="CT1:" Style="{StaticResource lb}" Margin="2" Width="40"/>
+                            <TextBox x:Name="tbMTypeT2" Style="{StaticResource tb}" Margin="2" Width="30" MaxLength="1"/>
+                            <Label Content="CT2:" Style="{StaticResource lb}" Margin="2" Width="40"/>
+                            <TextBox x:Name="tbMTypeT3" Style="{StaticResource tb}" Margin="2" Width="30" MaxLength="1"/>
+                            <Label Content="CT3:" Style="{StaticResource lb}" Margin="2" Width="40"/>
+                            <TextBox x:Name="tbMTypeT4" Style="{StaticResource tb}" Margin="2" Width="30" MaxLength="1"/>
+                        </StackPanel>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbMTypeX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbMTypeY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbMTypeWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbMTypeHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+
+                        <!-- Description -->
+                        <Label Content="Beschreibung der Karte" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftart:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbDescFontfamily" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftgröße:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbDescFontsize" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftfarbe:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbDescR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbDescG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbDescB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbDesc" Style="{StaticResource cb}" 
+                                      Content="Soll die Beschreibung der Karte visuell dargestellt werden." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbDescX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbDescY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbDescWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbDescHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+
+                        <!-- ATK DEF -->
+                        <Label Content="ATK- und DEF- Wert des Monsters" Style="{StaticResource splitter}" />
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftart:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbStatsFontfamily" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftgröße:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbStatsFontsize" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="Schriftfarbe:" Style="{StaticResource lb}" Width="120"/>
+                            <Label Content="R:" Style="{StaticResource lb}" Width="30" Margin="125,2,3,2"/>
+                            <TextBox x:Name="tbStatsR" Style="{StaticResource tb}" Width="30" Margin="160,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="G:" Style="{StaticResource lb}" Width="30" Margin="195,2,2,2"/>
+                            <TextBox x:Name="tbStatsG" Style="{StaticResource tb}" Width="30" Margin="230,2,3,2" Padding="0" MaxLength="3"/>
+                            <Label Content="B:" Style="{StaticResource lb}" Width="30" Margin="265,2,2,2"/>
+                            <TextBox x:Name="tbStatsB" Style="{StaticResource tb}" Width="30" Margin="300,2,3,2" Padding="0" MaxLength="3"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbAtk" Style="{StaticResource cb}" 
+                                      Content="Soll die ATK visuell dargestellt werden." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="ATK Format:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbAtkFormat" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="ATK Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbAtkX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="ATK Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbAtkY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="ATK Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbAtkWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="ATK Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbAtkHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="verwenden?" Style="{StaticResource lb}"/>
+                            <CheckBox x:Name="cbDef" Style="{StaticResource cb}" 
+                                      Content="Soll die DEF visuell dargestellt werden." />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="DEF Format:" Style="{StaticResource lb}"/>
+                            <TextBox x:Name="tbDefFormat" Style="{StaticResource tb}" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="DEF Position X:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbDefX" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="DEF Position Y:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbDefY" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" Height="30" Margin="5,3,8,2">
+                            <Label Content="DEF Breite:" Style="{StaticResource lb}" Width="120"/>
+                            <TextBox x:Name="tbDefWidth" Style="{StaticResource tb}" Width="120" Margin="125,2,2,2"/>
+                            <Label Content="DEF Höhe:" Style="{StaticResource lb}" Width="120" Margin="250,2,2,2"/>
+                            <TextBox x:Name="tbDefHeight" Style="{StaticResource tb}" Width="120" Margin="375,2,2,2"/>
+                        </Grid>
+
+
+                        <Label Content="Sonstiges" Style="{StaticResource splitter}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Label Content="GBA-Nr:" Style="{StaticResource lb}"/>
+                <TextBox x:Name="tbSampleID" Style="{StaticResource tb}" Width="100" MaxLength="10" MaxLines="1"/>
+            </Grid>
+            <Image x:Name="Preview" Grid.Row="2" Grid.Column="1" />
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="2,2,2,2" HorizontalAlignment="Right">
+            <Label x:Name="lbNewBtn" Style="{StaticResource LabelButton}" Margin="3,0"
+               Content="New" MouseLeftButtonUp="NewBtn_MouseLeftButtonUp"/>
+            <Label x:Name="lbRefreshBtn" Style="{StaticResource LabelButton}" Margin="3,0"
+               Content="Refresh" MouseLeftButtonUp="RefreshBtn_MouseLeftButtonUp"/>
+            <Label x:Name="lbCancelBtn" Style="{StaticResource LabelButton}" Margin="3,0"
+               Content="Cancel" MouseLeftButtonUp="CancelBtn_MouseLeftButtonUp"/>
+            <Label x:Name="lbSaveBtn" Style="{StaticResource LabelButton}" Margin="3,0"
+               Content="Save" MouseLeftButtonUp="SaveBtn_MouseLeftButtonUp"/>
+        </StackPanel>
+        </Grid>
+    </Border>
+</Window>

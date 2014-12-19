@@ -12,6 +12,7 @@ namespace Ygo_Picture_Creator
         public static Configurations Config;
         public static MainWindow MainWin;
         public static CardManagement CardManager;
+        public static TemplateEditor TempEditor;
 
         public static void Run(string[] args)
         {
@@ -53,6 +54,10 @@ namespace Ygo_Picture_Creator
             {
                 _dbpath = value;
                 CardManager = new CardManagement(new Database(value));
+
+                // Save new DBPath as Default
+                Config.DefaultDatabasePath = value;
+                SerializeClass(DirectoryManager.FileData("config.xml"), Config, typeof(Configurations));
             }
         }
 

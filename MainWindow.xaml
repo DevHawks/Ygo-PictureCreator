@@ -53,9 +53,30 @@
             <RichTextBox x:Name="rtbConsole" Grid.Row="1" Grid.Column="0" Margin="2" VerticalScrollBarVisibility="Visible" 
                          Background="{StaticResource cDark3}" BorderBrush="{StaticResource cDark4}" 
                          Focusable="False" IsReadOnly="True"/>
+
+            <Label x:Name="lbSettings" Content="Settings:" Grid.Row="0" Grid.Column="1" Margin="2"
+               Style="{StaticResource DirLabel}" />
+
+            <Border Grid.Column="1" Grid.Row="1" Margin="20" Background="{StaticResource cDark3}" BorderBrush="{StaticResource cDark4}"
+                    BorderThickness="1" MaxWidth="600" MaxHeight="500">
+                <StackPanel Orientation="Vertical">
+                    <Grid HorizontalAlignment="Stretch" Height="30" Margin="2">
+                        <Label Width="80" Content="Template:" Margin="2" HorizontalAlignment="Left"
+                               Style="{StaticResource DirLabel}" HorizontalContentAlignment="Right"/>
+                        <ComboBox x:Name="cbxTemplates" Width="160" Margin="2" Foreground="White" IsReadOnly="True" 
+                                  SelectionChanged="cbxTemplates_SelectionChanged" />
+                        <Label x:Name="lbRefreshTemp" Style="{StaticResource LabelButton}" 
+                               Margin="3,1" Width="80" VerticalAlignment="Stretch"
+                               Content="Refresh" MouseLeftButtonUp="Refresh_MouseLeftButtonUp"/>
+                    </Grid>
+                    
+                </StackPanel>
+            </Border>
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="2,2,20,2" HorizontalAlignment="Right">
+            <Label x:Name="lbOpenTE" Style="{StaticResource LabelButton}" Margin="3,0"
+               Content="Template Editor" MouseLeftButtonUp="OpenTEBtn_MouseLeftButtonUp"/>
             <Label x:Name="lbCancelBtn" Style="{StaticResource LabelButton}" Margin="3,0"
                Content="Cancel" MouseLeftButtonUp="CancelBtn_MouseLeftButtonUp"/>
             <Label x:Name="lbStartBtn" Style="{StaticResource LabelButton}" Margin="3,0"

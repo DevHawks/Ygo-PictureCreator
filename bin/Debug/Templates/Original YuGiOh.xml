@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TemplateName>Original YuGiOh</TemplateName>
+  <FullPictureWidth>344</FullPictureWidth>
+  <FullPictureHeight>512</FullPictureHeight>
+  <Cardtype_Normal>normal.png</Cardtype_Normal>
+  <Cardtype_Effect>effect.png</Cardtype_Effect>
+  <Cardtype_Fusion>fusion.png</Cardtype_Fusion>
+  <Cardtype_Ritual>ritual.png</Cardtype_Ritual>
+  <Cardtype_Synchro>synchro.png</Cardtype_Synchro>
+  <Cardtype_Xyz>xyz.png</Cardtype_Xyz>
+  <Cardtype_Token>token.png</Cardtype_Token>
+  <Cardtype_Pendulum>pendulum.png</Cardtype_Pendulum>
+  <Cardtype_Spellcard>spell.png</Cardtype_Spellcard>
+  <Cardtype_Trapcard>trap.png</Cardtype_Trapcard>
+  <DrawCardname>true</DrawCardname>
+  <Cardname_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2</Cardname_Fontname>
+  <Cardname_Fontsize>12</Cardname_Fontsize>
+  <Cardname_Color_Normal>AAAA</Cardname_Color_Normal>
+  <Cardname_Color_NormalEffect>AAAA</Cardname_Color_NormalEffect>
+  <Cardname_Color_Fusion>AAAA</Cardname_Color_Fusion>
+  <Cardname_Color_Ritual>AAAA</Cardname_Color_Ritual>
+  <Cardname_Color_Synchro>AAAA</Cardname_Color_Synchro>
+  <Cardname_Color_Xyz>AAAA</Cardname_Color_Xyz>
+  <Cardname_Color_Token>AAAA</Cardname_Color_Token>
+  <Cardname_Color_Pendulum>AAAA</Cardname_Color_Pendulum>
+  <Cardname_Color_Spell>AAAA</Cardname_Color_Spell>
+  <Cardname_Color_Trap>AAAA</Cardname_Color_Trap>
+  <CardnameAreaX>30</CardnameAreaX>
+  <CardnameAreaY>30</CardnameAreaY>
+  <CardnameWidth>220</CardnameWidth>
+  <CardnameHeight>28</CardnameHeight>
+  <DrawAttribute>true</DrawAttribute>
+  <AttributePositionX>285</AttributePositionX>
+  <AttributePositionY>30</AttributePositionY>
+  <AttributeWidth>30</AttributeWidth>
+  <AttributeHeight>30</AttributeHeight>
+  <AttributeDark>dark.png</AttributeDark>
+  <AttributeLight>light.png</AttributeLight>
+  <AttributeFire>fire.png</AttributeFire>
+  <AttributeWater>water.png</AttributeWater>
+  <AttributeEarth>earth.png</AttributeEarth>
+  <AttributeWind>wind.png</AttributeWind>
+  <AttributeDivine>divine.png</AttributeDivine>
+  <AttributeSpell>magic.png</AttributeSpell>
+  <AttributeTrap>trap.png</AttributeTrap>
+  <DrawRank>true</DrawRank>
+  <DrawRankHorizontal>true</DrawRankHorizontal>
+  <DrawRankLeftToRight>false</DrawRankLeftToRight>
+  <RankAreaX>315</RankAreaX>
+  <RankAreaY>69</RankAreaY>
+  <RankWidth>25</RankWidth>
+  <RankHeight>25</RankHeight>
+  <LevelPicture>level.png</LevelPicture>
+  <RankPicture>rank.png</RankPicture>
+  <CardPicAreaX>42</CardPicAreaX>
+  <CardPicAreaY>106</CardPicAreaY>
+  <CardPicAreaWidth>260</CardPicAreaWidth>
+  <CardPicAreaHeight>260</CardPicAreaHeight>
+  <DrawMonstertype>true</DrawMonstertype>
+  <Monstertype_Fontname />
+  <Monstertype_Fontsize>12</Monstertype_Fontsize>
+  <Monstertype_Color>AAAA</Monstertype_Color>
+  <Monstertype_Format>[{0}|{1}|{2}|{3}]</Monstertype_Format>
+  <Monstertype_FormatDeclaration>
+    <string>MT</string>
+    <string>CT1</string>
+    <string>CT2</string>
+    <string>CT3</string>
+  </Monstertype_FormatDeclaration>
+  <MonstertypeAreaX>0</MonstertypeAreaX>
+  <MonstertypeAreaY>0</MonstertypeAreaY>
+  <MonstertypeWidth>0</MonstertypeWidth>
+  <MonstertypeHeight>0</MonstertypeHeight>
+  <DrawDescription>true</DrawDescription>
+  <Desc_Fontname />
+  <Desc_Fontsize>12</Desc_Fontsize>
+  <Desc_Color>AAAA</Desc_Color>
+  <DescAreaX>0</DescAreaX>
+  <DescAreaY>0</DescAreaY>
+  <DescWidth>0</DescWidth>
+  <DescHeight>0</DescHeight>
+  <DrawATK>true</DrawATK>
+  <ATK_Fontname />
+  <ATK_Fontsize>12</ATK_Fontsize>
+  <ATK_Color>AAAA</ATK_Color>
+  <ATK_Format>ATK/{0}</ATK_Format>
+  <ATK_AreaX>0</ATK_AreaX>
+  <ATK_AreaY>0</ATK_AreaY>
+  <ATK_Width>0</ATK_Width>
+  <ATK_Height>0</ATK_Height>
+  <DrawDEF>true</DrawDEF>
+  <DEF_Fontname />
+  <DEF_Fontsize>12</DEF_Fontsize>
+  <DEF_Color>AAAA</DEF_Color>
+  <DEF_Format>DEF/{0}</DEF_Format>
+  <DEF_AreaX>0</DEF_AreaX>
+  <DEF_AreaY>0</DEF_AreaY>
+  <DEF_Width>0</DEF_Width>
+  <DEF_Height>0</DEF_Height>
+</Template>
