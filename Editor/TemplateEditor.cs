@@ -120,15 +120,51 @@ namespace Ygo_Picture_Creator
             #endregion
 
             #region Monstertypes
+            t.DrawMonstertype = (bool)cbMType.IsChecked;
+            t.Monstertype_Fontname = tbMTypeFontfamily.Text.Trim();
+            t.Monstertype_Fontsize = GetFloat(tbMTypeFontsize.Text);
+            t.Monstertype_Format = @tbMTypeFormat.Text;
+            t.Monstertype_Color = new byte[] { GetByte(tbMTypeR.Text), GetByte(tbMTypeG.Text), GetByte(tbMTypeB.Text) };
 
+            // TODO 
+            // Monstertype Format Declaration T1 T2 T3 T4 
+            // Sample for Warrior/Synchro/Effect/Tuner is T1 T2 T4 T3
+
+            t.MonstertypeAreaX = GetFloat(tbMTypeX.Text);
+            t.MonstertypeAreaY = GetFloat(tbMTypeY.Text);
+            t.MonstertypeWidth = GetFloat(tbMTypeWidth.Text);
+            t.MonstertypeHeight = GetFloat(tbMTypeHeight.Text);
             #endregion
 
             #region Description
-
+            t.DrawDescription = (bool)cbDesc.IsChecked;
+            t.Desc_Fontname = tbDescFontfamily.Text.Trim();
+            t.Desc_Fontsize = GetFloat(tbDescFontsize.Text);
+            t.DescAreaX = GetFloat(tbDescX.Text);
+            t.DescAreaY = GetFloat(tbDescY.Text);
+            t.DescWidth = GetFloat(tbDescWidth.Text);
+            t.DescHeight = GetFloat(tbDescHeight.Text);
+            t.Desc_Color = new byte[] { GetByte(tbDescR.Text), GetByte(tbDescG.Text), GetByte(tbDescB.Text) };
             #endregion
 
             #region Stats
+            t.Stats_Fontname = tbStatsFontfamily.Text.Trim();
+            t.Stats_Fontsize = GetFloat(tbStatsFontsize.Text);
+            t.Stats_Color = new byte[] { GetByte(tbStatsR.Text), GetByte(tbStatsG.Text), GetByte(tbStatsB.Text) };
 
+            t.DrawATK = (bool)cbAtk.IsChecked;
+            t.ATK_Format = @tbAtkFormat.Text;
+            t.ATK_AreaX = GetFloat(tbAtkX.Text);
+            t.ATK_AreaY = GetFloat(tbAtkY.Text);
+            t.ATK_Width = GetFloat(tbAtkWidth.Text);
+            t.ATK_Height = GetFloat(tbAtkHeight.Text);
+
+            t.DrawDEF = (bool)cbDef.IsChecked;
+            t.DEF_Format = @tbDefFormat.Text;
+            t.DEF_AreaX = GetFloat(tbDefX.Text);
+            t.DEF_AreaY = GetFloat(tbDefY.Text);
+            t.DEF_Width = GetFloat(tbDefWidth.Text);
+            t.DEF_Height = GetFloat(tbDefHeight.Text);
             #endregion
         }
 
@@ -243,15 +279,57 @@ namespace Ygo_Picture_Creator
             #endregion
 
             #region Monstertypes
+            cbMType.IsChecked = t.DrawMonstertype;
+            tbMTypeFontfamily.Text = t.Monstertype_Fontname;
+            tbMTypeFontsize.Text = t.Monstertype_Fontsize.ToString();
+            tbMTypeFormat.Text = @t.Monstertype_Format;
+            tbMTypeR.Text = t.Monstertype_Color[0].ToString();
+            tbMTypeG.Text = t.Monstertype_Color[1].ToString();
+            tbMTypeB.Text = t.Monstertype_Color[2].ToString();
+            tbMTypeT1.Text = t.Monstertype_FormatDeclaration[0];
+            tbMTypeT2.Text = t.Monstertype_FormatDeclaration[1];
+            tbMTypeT3.Text = t.Monstertype_FormatDeclaration[2];
+            tbMTypeT4.Text = t.Monstertype_FormatDeclaration[3];
 
+            tbMTypeX.Text = t.MonstertypeAreaX.ToString();
+            tbMTypeY.Text = t.MonstertypeAreaY.ToString();
+            tbMTypeWidth.Text = t.MonstertypeWidth.ToString();
+            tbMTypeHeight.Text = t.MonstertypeHeight.ToString();
             #endregion
 
             #region Description
-
+            cbDesc.IsChecked = t.DrawDescription;
+            tbDescFontfamily.Text = t.Desc_Fontname;
+            tbDescFontsize.Text = t.Desc_Fontsize.ToString();
+            tbDescX.Text = t.DescAreaX.ToString();
+            tbDescY.Text = t.DescAreaY.ToString();
+            tbDescWidth.Text = t.DescWidth.ToString();
+            tbDescHeight.Text = t.DescHeight.ToString();
+            tbDescR.Text = t.Desc_Color[0].ToString();
+            tbDescG.Text = t.Desc_Color[1].ToString();
+            tbDescB.Text = t.Desc_Color[2].ToString();
             #endregion
 
             #region Stats
+            tbStatsFontfamily.Text = t.Stats_Fontname;
+            tbStatsFontsize.Text = t.Stats_Fontsize.ToString();
+            tbStatsR.Text = t.Stats_Color[0].ToString();
+            tbStatsG.Text = t.Stats_Color[1].ToString();
+            tbStatsB.Text = t.Stats_Color[2].ToString();
 
+            cbAtk.IsChecked = t.DrawATK;
+            tbAtkFormat.Text = @t.ATK_Format;
+            tbAtkX.Text = t.ATK_AreaX.ToString();
+            tbAtkY.Text = t.ATK_AreaY.ToString();
+            tbAtkWidth.Text = t.ATK_Width.ToString();
+            tbAtkHeight.Text = t.ATK_Height.ToString();
+
+            cbDef.IsChecked = t.DrawDEF;
+            tbDefFormat.Text = @t.DEF_Format;
+            tbDefX.Text = t.DEF_AreaX.ToString();
+            tbDefY.Text = t.DEF_AreaY.ToString();
+            tbDefWidth.Text = t.DEF_Width.ToString();
+            tbDefHeight.Text = t.DEF_Height.ToString();
             #endregion
         }
 
@@ -280,6 +358,12 @@ namespace Ygo_Picture_Creator
             }
 
             return b;
+        }
+
+        public static bool CheckTemplate(Template t)
+        {
+            // TODO
+            return true;
         }
     }
 }

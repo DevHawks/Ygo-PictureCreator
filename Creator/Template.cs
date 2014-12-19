@@ -9,7 +9,7 @@ namespace Ygo_Picture_Creator
         public int FullPictureHeight = 512;
 
         #region Cardtype
-        //Resources Application\Resources\Custom\Cardtype\
+        //Resources Application\Resources\Cardtype\
 
         public string Cardtype_Normal = "";
         public string Cardtype_Effect = "";
@@ -25,11 +25,11 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region Cardname
-        //Resources Application\Resources\Custom\Fonts\
+        //Resources Application\Resources\Fonts\
 
         public bool DrawCardname = true;
 
-        public string Cardname_Fontname = "";
+        public string Cardname_Fontname = "Yu-Gi-Oh Matrix Regular Small Caps 2.ttf";
         public float Cardname_Fontsize = 12.0f;
         public byte[] Cardname_Color_Normal = new byte[] { 0, 0, 0 };
         public byte[] Cardname_Color_NormalEffect = new byte[] { 0, 0, 0 };
@@ -50,7 +50,7 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region Attributes
-        //Resources Application\Resources\Custom\Attributes
+        //Resources Application\Resources\Attributes
 
         public bool DrawAttribute = true;
 
@@ -72,7 +72,7 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region Level Rank
-        //Resources Application\Resources\Custom\Level
+        //Resources Application\Resources\Level
 
         public bool DrawRank = true;
         public bool DrawRankHorizontal = true;
@@ -90,7 +90,7 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region CardPicture
-        //Resources Application\Resources\Custom\Pics\
+        //Resources Application\Resources\Pics\
 
         public float CardPicAreaX = 0.0f;
         public float CardPicAreaY = 0.0f;
@@ -100,15 +100,15 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region Monstertype
-        //Resources Application\Resources\Custom\Fonts\
+        //Resources Application\Resources\Fonts\
         public bool DrawMonstertype = true;
-        public string Monstertype_Fontname = "";
+        public string Monstertype_Fontname = "Yu-Gi-Oh Matrix Regular Small Caps 2.ttf";
         public float Monstertype_Fontsize = 12.0f;
         public byte[] Monstertype_Color = new byte[] { 0, 0, 0 };
 
         public string Monstertype_Format = "[{0}|{1}|{2}|{3}]";
         // MT = MonsterType like Warrior and CT1 - CT? = Cardtype like Effect Synchro ...
-        public string[] Monstertype_FormatDeclaration = new string[] { "MT", "CT1", "CT2", "CT3" };
+        public string[] Monstertype_FormatDeclaration = new string[] { "T1", "T2", "T3", "T4" };
 
         public float MonstertypeAreaX = 0.0f;
         public float MonstertypeAreaY = 0.0f;
@@ -118,9 +118,9 @@ namespace Ygo_Picture_Creator
         #endregion
 
         #region Description
-        //Resources Application\Resources\Custom\Fonts\
+        //Resources Application\Resources\Fonts\
         public bool DrawDescription = true;
-        public string Desc_Fontname = "";
+        public string Desc_Fontname = "Yu-Gi-Oh Matrix Regular Small Caps 2.ttf";
         public float Desc_Fontsize = 12.0f;
         public byte[] Desc_Color = new byte[] { 0, 0, 0 };
 
@@ -131,36 +131,30 @@ namespace Ygo_Picture_Creator
 
         #endregion
 
+        #region MonsterStats ATK DEF
+        public string Stats_Fontname = "Yu-Gi-Oh Matrix Regular Small Caps 2.ttf";
+        public float Stats_Fontsize = 12.0f;
+        public byte[] Stats_Color = new byte[] { 0, 0, 0 };
+        #endregion
+
         #region MonsterATK
-        //Resources Application\Resources\Custom\Fonts\
+        //Resources Application\Resources\Fonts\
         public bool DrawATK = true;
-        public string ATK_Fontname = "";
-        public float ATK_Fontsize = 12.0f;
-        public byte[] ATK_Color = new byte[] { 0, 0, 0 };
-
         public string ATK_Format = "ATK/{0}";
-
         public float ATK_AreaX = 0.0f;
         public float ATK_AreaY = 0.0f;
         public float ATK_Width = 0.0f;
         public float ATK_Height = 0.0f;
-
         #endregion
 
         #region MonsterDEF
-        //Resources Application\Resources\Custom\Fonts\
+        //Resources Application\Resources\Fonts\
         public bool DrawDEF = true;
-        public string DEF_Fontname = "";
-        public float DEF_Fontsize = 12.0f;
-        public byte[] DEF_Color = new byte[] { 0, 0, 0 };
-
         public string DEF_Format = "DEF/{0}";
-
         public float DEF_AreaX = 0.0f;
         public float DEF_AreaY = 0.0f;
         public float DEF_Width = 0.0f;
         public float DEF_Height = 0.0f;
-
         #endregion
     }
 }

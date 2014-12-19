@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Creator\CardCreator.cs" />
+    <Compile Include="Creator\ThreadData.cs" />
     <Compile Include="Editor\TemplateEditor.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Creator\Template.cs" />

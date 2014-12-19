@@ -16,6 +16,10 @@
         <Rectangle Grid.Row="3" MouseLeftButtonDown="WindowDrag"
                    Fill="{StaticResource cDark3}" Stroke="{StaticResource cDark4}" StrokeThickness="0,1,0,0" />
 
+        <Label x:Name="lbHeadline" Content="YGOPro Card Picture Creator" Grid.Row="0" Margin="5" FontSize="18"
+               Width="600" Height="30" FontFamily="Segoe UI Light" Foreground="White"
+               HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="WindowDrag"/>
+
         <Menu Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent">
             <MenuItem x:Name="w1" Click="MinimizeClick_Executed" Style="{StaticResource MinimizeItem}"/>
             <MenuItem x:Name="w2" Click="MaximizeClick_Executed" Style="{StaticResource MaximizeItem}"/>
@@ -24,7 +28,7 @@
 
         <Path Width="18" Height="18" Margin="6" Grid.Row="1" Data="{StaticResource iconDb}" Stretch="UniformToFill"
               HorizontalAlignment="Left" VerticalAlignment="Stretch" Fill="{StaticResource cLight3}"/>
-        <Label x:Name="lbDatabaseSource" Content="nothing" Grid.Row="1" Margin="30,2,105,2"
+        <Label x:Name="lbDatabaseSource" Content="no database selected." Grid.Row="1" Margin="30,2,105,2"
                Style="{StaticResource DirLabel}" >
             <Label.ToolTip>
                 <ToolTip DataContext="{Binding Path=PlacementTarget, RelativeSource={x:Static RelativeSource.Self}}" Padding="0">

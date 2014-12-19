@@ -8,6 +8,7 @@ namespace Ygo_Picture_Creator
     public static class Program
     {
         private static string _dbpath = "";
+        public const string APP_VERSION = "0.6.0.2";
 
         public static Configurations Config;
         public static MainWindow MainWin;

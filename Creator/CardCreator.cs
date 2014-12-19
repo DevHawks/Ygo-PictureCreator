@@ -23,18 +23,22 @@ namespace Ygo_Picture_Creator
         private static PrivateFontCollection pfc;
         private static Font font_Cardname, font_Desc, font_Stats, font_Typ;
         private static FontFamily fam_Cardname, fam_Desc, fam_Stats, fam_Typ;
+        private static Brush bNormal, bEffect, bToken, bRitual, bFusion, bSynchro, bXyz, bPendulum, bSpell, bTrap;
+        private static Brush bStats, bDesc, bTyp;
 
         private static Bitmap bg_xyz, bg_normal, bg_synchro, bg_effect, bg_ritual, bg_fusion, bg_spell, bg_trap, bg_pendulum, bg_token;
         private static Bitmap aDark, aLight, aFire, aWater, aWind, aEarth, aDivine, aSpell, aTrap;
         private static Bitmap imgLevel, imgRank;
         #endregion
 
+        public static ThreadData TData;
+
         public CardCreator(Template temp = null)
         {
             if (temp != null) 
                 Temp = temp;
 
-
+            TData = new ThreadData();
         }
 
         public void Start()
@@ -130,10 +134,33 @@ namespace Ygo_Picture_Creator
 
             #endregion
 
+            #region
+            bNormal = new SolidBrush(Color.FromArgb(t.Cardname_Color_Normal[0], t.Cardname_Color_Normal[1], t.Cardname_Color_Normal[2]));
+            bEffect = new SolidBrush(Color.FromArgb(t.Cardname_Color_NormalEffect[0], t.Cardname_Color_NormalEffect[1], t.Cardname_Color_NormalEffect[2]));
+            bToken = new SolidBrush(Color.FromArgb(t.Cardname_Color_Token[0], t.Cardname_Color_Token[1], t.Cardname_Color_Token[2]));
+            bRitual = new SolidBrush(Color.FromArgb(t.Cardname_Color_Ritual[0], t.Cardname_Color_Ritual[1], t.Cardname_Color_Ritual[2]));
+            bFusion = new SolidBrush(Color.FromArgb(t.Cardname_Color_Fusion[0], t.Cardname_Color_Fusion[1], t.Cardname_Color_Fusion[2]));
+            bSynchro = new SolidBrush(Color.FromArgb(t.Cardname_Color_Synchro[0], t.Cardname_Color_Synchro[1], t.Cardname_Color_Synchro[2]));
+            bXyz = new SolidBrush(Color.FromArgb(t.Cardname_Color_Xyz[0], t.Cardname_Color_Xyz[1], t.Cardname_Color_Xyz[2]));
+            bPendulum = new SolidBrush(Color.FromArgb(t.Cardname_Color_Pendulum[0], t.Cardname_Color_Pendulum[1], t.Cardname_Color_Pendulum[2]));
+            bSpell = new SolidBrush(Color.FromArgb(t.Cardname_Color_Spell[0], t.Cardname_Color_Spell[1], t.Cardname_Color_Spell[2]));
+            bTrap = new SolidBrush(Color.FromArgb(t.Cardname_Color_Trap[0], t.Cardname_Color_Trap[1], t.Cardname_Color_Trap[2]));
+            #endregion
+
             #region Fonts
             pfc = new PrivateFontCollection();
 
-            font_Cardname = new Font(t.Cardname_Fontname, t.Cardname_Fontsize);
+            fam_Cardname = LoadFontFamily(GetFontPath(t.Cardname_Fontname));
+            font_Cardname = new Font(fam_Cardname, t.Cardname_Fontsize);
+
+            fam_Typ = LoadFontFamily(GetFontPath(t.Monstertype_Fontname));
+            font_Typ = new Font(fam_Typ, t.Monstertype_Fontsize);
+
+            fam_Desc = LoadFontFamily(GetFontPath(t.Desc_Fontname));
+            font_Desc = new Font(fam_Desc, t.Desc_Fontsize);
+
+            fam_Stats = LoadFontFamily(GetFontPath(t.Stats_Fontname));
+            font_Stats = new Font(fam_Stats, t.Stats_Fontsize);
             #endregion
 
             isInit = true;
@@ -141,11 +168,31 @@ namespace Ygo_Picture_Creator
 
         public void EndInit()
         {
-
+            try
+            {
+                font_Cardname.Dispose();
+                font_Desc.Dispose();
+                font_Stats.Dispose();
+                font_Typ.Dispose();
+                fam_Cardname.Dispose();
+                fam_Desc.Dispose();
+                fam_Stats.Dispose();
+                fam_Typ.Dispose();
+                pfc.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Program.MainWin.Write(ex.Message, MainWindow.ConsoleMsgType.Error);
+            }
 
             isInit = false;
         }
 
+        private string GetFontPath(string font)
+        {
+            return DirectoryManager.FileResources(DirectoryManager.CustomFolders.Fonts, font);
+        }
+        
         private void create()
         {
             if (Program.CardManager.Cardlist.Count < 1)
@@ -160,13 +207,13 @@ namespace Ygo_Picture_Creator
                 return;
             }
 
-            // TODO Check Template !!!
+            TemplateEditor.CheckTemplate(Temp);
 
             for (int i = 0; i < Program.CardManager.Cardlist.Count; i++)
             {
                 CreateFile(Program.CardManager.Cardlist[i], i);
 
-                Thread.Sleep(5);
+                Thread.Sleep(TData.ThreadSleepTime);
             }
 
             EndInit();
@@ -184,6 +231,9 @@ namespace Ygo_Picture_Creator
             DrawAttribute(data, t);
             DrawCardpicture(data, t);
             DrawCardname(data, t);
+            DrawTyp(data, t);
+            DrawDescription(data, t);
+            DrawStats(data, t);
 
             return bmp;
         }
@@ -374,7 +424,110 @@ namespace Ygo_Picture_Creator
 
         private void DrawCardname(Card data, Template t)
         {
+            if (!t.DrawCardname) return;
 
+            char[] chars = data.Cardname.Trim().ToCharArray();
+
+            PointF p = new PointF(t.CardnameAreaX, t.CardnameAreaY);
+
+            foreach (char c in chars)
+            {
+                if (p.X > (t.CardnameWidth - t.CardnameAreaX))
+                    break;
+
+                float f = GetCharWidth(c);
+                g.DrawString(c.ToString(), font_Cardname, SelectBrush(data), p);
+                p.X += f;
+            }
+        }
+
+        private void DrawTyp(Card data, Template t)
+        {
+            if (!t.DrawMonstertype) return;
+            if (!data.IsMonster) return;
+
+            if (bTyp == null)
+                bTyp = new SolidBrush(Color.FromArgb(t.Monstertype_Color[0], t.Monstertype_Color[1], t.Monstertype_Color[2]));
+
+            string MtypeString = data.GetCardType;
+            // TODO Need a better way to get Cardtypes :-(
+
+            RectangleF r = new RectangleF(t.MonstertypeAreaX, t.MonstertypeAreaY, t.MonstertypeWidth, t.MonstertypeHeight);
+
+            g.DrawString(MtypeString, font_Typ, bTyp, r);
+            
+        }
+
+        private void DrawDescription(Card data, Template t)
+        {
+            if (!t.DrawDescription) return;
+
+            if (bDesc == null)
+                bDesc = new SolidBrush(Color.FromArgb(t.Desc_Color[0], t.Desc_Color[1], t.Desc_Color[2]));
+
+            //char[] chars = data.CardDescription.Trim().ToCharArray();
+
+            RectangleF r = new RectangleF(t.DescAreaX, t.DescAreaY, t.DescWidth, t.DescHeight);
+
+            g.DrawString(data.CardDescription.Trim(), font_Desc, bDesc, r);
+            //for (int i = 0; i < chars.Length; i++)
+            //{
+                
+            //}
+        }
+
+        private void DrawStats(Card data, Template t)
+        {
+            if (!data.IsMonster) return;
+
+            if (bStats == null)
+                bStats = new SolidBrush(Color.FromArgb(t.Stats_Color[0], t.Stats_Color[1], t.Stats_Color[2]));
+
+            if(t.DrawATK)
+            {
+                string text = string.Format(t.ATK_Format, data.ATK);
+                RectangleF r = new RectangleF(t.ATK_AreaX, t.ATK_AreaY, t.ATK_Width, t.ATK_Height);
+                g.DrawString(text, font_Stats, bStats, r);
+            }
+            if(t.DrawDEF)
+            {
+                string text = string.Format(t.DEF_Format, data.DEF);
+                RectangleF r = new RectangleF(t.DEF_AreaX, t.DEF_AreaY, t.DEF_Width, t.DEF_Height);
+                g.DrawString(text, font_Stats, bStats, r);
+            }
+        }
+
+        private Brush SelectBrush(Card data)
+        {
+            if (data.IsSpell) return bSpell;
+            else if (data.IsTrap) return bTrap;
+            else if (data.IsNormalMonster) return bNormal;
+            else if (data.IsNormalEffectMonster) return bEffect;
+            else if (data.IsPendulum) return bPendulum;
+            else if (data.IsRitualType) return bRitual;
+            else if (data.IsFusionType) return bFusion;
+            else if (data.IsSynchroType) return bSynchro;
+            else if (data.IsXyzType) return bXyz;
+            else return bToken;
+        }
+
+        private float GetCharWidth(char c)
+        {
+            SizeF size = g.MeasureString(c.ToString(), font_Cardname);
+
+            // To much white space -.-
+            size.Width = (float)(size.Width * 0.52f);
+
+            return size.Width;
+        }
+
+        public static FontFamily LoadFontFamily(string fileName)
+        {
+            if (pfc == null)
+                pfc = new PrivateFontCollection();
+            pfc.AddFontFile(fileName);
+
+            return pfc.Families[pfc.Families.Length - 1];
         }
     }
 }

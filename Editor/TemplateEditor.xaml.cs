@@ -214,6 +214,7 @@ namespace Ygo_Picture_Creator
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                Program.CardManager.Creator.EndInit();
             }
         }
     }

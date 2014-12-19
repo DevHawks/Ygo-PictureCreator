@@ -14,14 +14,14 @@
   <Cardtype_Spellcard>spell.png</Cardtype_Spellcard>
   <Cardtype_Trapcard>trap.png</Cardtype_Trapcard>
   <DrawCardname>true</DrawCardname>
-  <Cardname_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2</Cardname_Fontname>
-  <Cardname_Fontsize>12</Cardname_Fontsize>
+  <Cardname_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2.ttf</Cardname_Fontname>
+  <Cardname_Fontsize>20</Cardname_Fontsize>
   <Cardname_Color_Normal>AAAA</Cardname_Color_Normal>
   <Cardname_Color_NormalEffect>AAAA</Cardname_Color_NormalEffect>
   <Cardname_Color_Fusion>AAAA</Cardname_Color_Fusion>
   <Cardname_Color_Ritual>AAAA</Cardname_Color_Ritual>
   <Cardname_Color_Synchro>AAAA</Cardname_Color_Synchro>
-  <Cardname_Color_Xyz>AAAA</Cardname_Color_Xyz>
+  <Cardname_Color_Xyz>////</Cardname_Color_Xyz>
   <Cardname_Color_Token>AAAA</Cardname_Color_Token>
   <Cardname_Color_Pendulum>AAAA</Cardname_Color_Pendulum>
   <Cardname_Color_Spell>AAAA</Cardname_Color_Spell>
@@ -58,8 +58,8 @@
   <CardPicAreaWidth>260</CardPicAreaWidth>
   <CardPicAreaHeight>260</CardPicAreaHeight>
   <DrawMonstertype>true</DrawMonstertype>
-  <Monstertype_Fontname />
-  <Monstertype_Fontsize>12</Monstertype_Fontsize>
+  <Monstertype_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2.ttf</Monstertype_Fontname>
+  <Monstertype_Fontsize>14</Monstertype_Fontsize>
   <Monstertype_Color>AAAA</Monstertype_Color>
   <Monstertype_Format>[{0}|{1}|{2}|{3}]</Monstertype_Format>
   <Monstertype_FormatDeclaration>
@@ -68,34 +68,31 @@
     <string>CT2</string>
     <string>CT3</string>
   </Monstertype_FormatDeclaration>
-  <MonstertypeAreaX>0</MonstertypeAreaX>
-  <MonstertypeAreaY>0</MonstertypeAreaY>
-  <MonstertypeWidth>0</MonstertypeWidth>
-  <MonstertypeHeight>0</MonstertypeHeight>
+  <MonstertypeAreaX>35</MonstertypeAreaX>
+  <MonstertypeAreaY>392</MonstertypeAreaY>
+  <MonstertypeWidth>270</MonstertypeWidth>
+  <MonstertypeHeight>20</MonstertypeHeight>
   <DrawDescription>true</DrawDescription>
-  <Desc_Fontname />
-  <Desc_Fontsize>12</Desc_Fontsize>
+  <Desc_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2.ttf</Desc_Fontname>
+  <Desc_Fontsize>8</Desc_Fontsize>
   <Desc_Color>AAAA</Desc_Color>
-  <DescAreaX>0</DescAreaX>
-  <DescAreaY>0</DescAreaY>
-  <DescWidth>0</DescWidth>
-  <DescHeight>0</DescHeight>
+  <DescAreaX>35</DescAreaX>
+  <DescAreaY>408</DescAreaY>
+  <DescWidth>270</DescWidth>
+  <DescHeight>65</DescHeight>
+  <Stats_Fontname>Yu-Gi-Oh Matrix Regular Small Caps 2.ttf</Stats_Fontname>
+  <Stats_Fontsize>14</Stats_Fontsize>
+  <Stats_Color>AAAA</Stats_Color>
   <DrawATK>true</DrawATK>
-  <ATK_Fontname />
-  <ATK_Fontsize>12</ATK_Fontsize>
-  <ATK_Color>AAAA</ATK_Color>
   <ATK_Format>ATK/{0}</ATK_Format>
-  <ATK_AreaX>0</ATK_AreaX>
-  <ATK_AreaY>0</ATK_AreaY>
-  <ATK_Width>0</ATK_Width>
-  <ATK_Height>0</ATK_Height>
+  <ATK_AreaX>185</ATK_AreaX>
+  <ATK_AreaY>468</ATK_AreaY>
+  <ATK_Width>70</ATK_Width>
+  <ATK_Height>20</ATK_Height>
   <DrawDEF>true</DrawDEF>
-  <DEF_Fontname />
-  <DEF_Fontsize>12</DEF_Fontsize>
-  <DEF_Color>AAAA</DEF_Color>
   <DEF_Format>DEF/{0}</DEF_Format>
-  <DEF_AreaX>0</DEF_AreaX>
-  <DEF_AreaY>0</DEF_AreaY>
-  <DEF_Width>0</DEF_Width>
-  <DEF_Height>0</DEF_Height>
+  <DEF_AreaX>250</DEF_AreaX>
+  <DEF_AreaY>468</DEF_AreaY>
+  <DEF_Width>70</DEF_Width>
+  <DEF_Height>20</DEF_Height>
 </Template>

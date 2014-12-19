@@ -25,12 +25,16 @@ namespace Ygo_Picture_Creator
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            lbHeadline.Content = "YGOPro Card Picture Creator - v" + Program.APP_VERSION;
+
             rtbConsole.Document.Blocks.Clear();
 
             if (!string.IsNullOrEmpty(Program.Config.DefaultDatabasePath))
                 SetDatabasePath(Program.Config.DefaultDatabasePath);
             else
                 SetDatabasePath("");
+
+            LoadTemplates();
         }
 
         private void SetDatabasePath(string path)
